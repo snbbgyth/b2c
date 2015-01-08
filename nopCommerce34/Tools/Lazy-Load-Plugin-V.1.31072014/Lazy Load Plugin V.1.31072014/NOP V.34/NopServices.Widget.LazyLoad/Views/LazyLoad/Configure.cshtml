@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "";
+}
+@model NopServices.Widget.LazyLoad.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.JQuerySelector):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.JQuerySelector)
+                @Html.ValidationMessageFor(model => model.JQuerySelector)
+            </td>
+        </tr>
+         <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.EffectSpeed):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.EffectSpeed)
+                @Html.ValidationMessageFor(model => model.EffectSpeed)
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" width="100%">
+                <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            </td>
+        </tr>
+    </table>
+
+}

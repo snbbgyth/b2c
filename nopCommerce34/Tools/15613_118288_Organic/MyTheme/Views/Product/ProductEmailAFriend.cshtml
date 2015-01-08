@@ -1,0 +1,77 @@
+﻿@model ProductEmailAFriendModel
+@using Nop.Web.Models.Catalog;
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(Model.ProductName);
+    Html.AddTitleParts(T("PageTitle.ProductEmailAFriend").Text);
+}
+<div class="page email-a-friend-page">
+    <div class="page-title">
+        <h4 class="no-margin color-grn font-spr">@T("Products.EmailAFriend.Title")</h4>
+        <div class="underline-dased clearfix margin-t5">&nbsp;</div>
+    </div>
+    <div class="page-body panel">
+        <div class="panel-body">
+            <div class="title border-b">
+                <h4 class="no-margin bold font-sr"><a href="@Url.RouteUrl("Product", new { SeName = Model.ProductSeName })" class="product">@Model.ProductName</a></h4>
+            </div>
+            @if (Model.SuccessfullySent)
+            {
+                <div class="result">
+                    @Model.Result
+                </div>
+            }
+            else
+            {
+                using (Html.BeginForm())
+                {
+                    <div class="message-error">
+                        @Html.ValidationSummary(true)
+                    </div>
+                    <div class="form-fields margin-t10">
+                        <div class="inputs-left">
+                            <div class="inputs row margin-b10">
+                                @Html.LabelFor(model => model.FriendEmail, new { @class = "col-sm-3 control-label"})
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.FriendEmail, new { @class = "friend-email form-control no-br", placeholder = T("Products.EmailAFriend.FriendEmail.Hint") })
+                                    @Html.ValidationMessageFor(model => model.FriendEmail)
+                                </div>
+                            </div>
+                            <div class="inputs row margin-b10">
+                                @Html.LabelFor(model => model.YourEmailAddress, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.YourEmailAddress, new { @class = "your-email form-control no-br no-resize", placeholder = T("Products.EmailAFriend.YourEmailAddress.Hint") })
+                                    @Html.ValidationMessageFor(model => model.YourEmailAddress)
+                                </div>
+                            </div>
+                            @if (Model.DisplayCaptcha)
+{
+    <div class="captcha-box row margin-b10">
+        <div class="col-sm-9 col-sm-offset-3">
+            @Html.Raw(Html.GenerateCaptcha())
+        </div>
+    </div>
+}
+                        </div>
+                        <div class="inputs-right">
+                            <div class="inputs row margin-b10">
+                                @Html.LabelFor(model => model.PersonalMessage, new { @class = "col-sm-3 control-label" })
+                                <div class="col-sm-9">
+                                    @Html.TextAreaFor(model => model.PersonalMessage, new { @class = "personal-message form-control no-br", placeholder = T("Products.EmailAFriend.PersonalMessage.Hint") })
+                                    @Html.ValidationMessageFor(model => model.PersonalMessage)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    <div class="buttons row">
+        <div class="col-sm-9 col-sm-offset-3">
+            <button type="submit" name="send-email" class="button-1 send-email-a-friend-button btn no-br btn-success"><i class="fa fa-envelope-o"></i> @T("Products.EmailAFriend.Button")</button>
+        </div>
+    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

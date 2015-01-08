@@ -1,0 +1,46 @@
+﻿@model NewsItemListModel
+@using Nop.Web.Extensions;
+@using Nop.Web.Models.News;
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.NewsArchive").Text);
+}
+<div class="page news-list-page">
+   
+    <h4 class="no-margin font-spr color-grn">@T("News") <a href="@Url.RouteUrl("NewsRSS", new { languageId = Model.WorkingLanguageId })" class="link-rss pull-right" title="@T("News.RSS.Hint")">@T("News.RSS")</a></h4>
+    <div class="underline-dased margin-t5 clearfix">&nbsp;</div>
+    <div class="page-body">
+        @Html.Widget("newslist_page_before_items")
+        <div class="news-items">
+            @foreach (var item in Model.NewsItems)
+{
+    <div class="panel no-br">
+        <div class="panel-body padd10 no-br">
+            <div class="news-head">
+                <a class="news-title font16 bold color-grn" href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })">
+                    @item.Title
+                </a>
+                <span class="news-date  font11">
+                    -
+                    @item.CreatedOn.ToString("D")
+                </span>
+            </div>
+            <p class="news-details color-37">
+                @Html.Raw(item.Short)
+            </p>
+            <a href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })" class="read-more">
+                @T("News.MoreInfo")
+            </a>
+            @Html.Widget("newslist_page_inside_item", item.Id)
+        </div>
+    </div>
+}
+        </div>
+        <div class="pager">
+            @Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber")
+        </div>
+        @Html.Widget("newslist_page_after_items")
+    </div>
+</div>

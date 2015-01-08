@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.PageNotFound").Text);
+}
+<div class="page not-found-page">
+        <h4 class="no-margin color-grn font-spr">@T("PageTitle.PageNotFound")</h4>
+        <div class="underline-dased clearfix margin-t5">&nbsp;</div>
+
+
+    <div class="page-body">
+        @Html.Action("TopicBlock", "Topic", new { systemName = "PageNotFound" })
+    </div>
+</div>

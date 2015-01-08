@@ -1,0 +1,41 @@
+﻿@model CheckoutCompletedModel
+@using Nop.Web.Models.Checkout;
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Checkout").Text);
+}
+@if (!Model.OnePageCheckoutEnabled)
+{
+    @Html.Action("CheckoutProgress", "Checkout", new { step = CheckoutProgressStep.Complete })
+}
+<div class="page checkout-page panel panel-default">
+    <div class="panel-body">
+      
+        <div class="page-title margin-t10">
+            <h4 class="no-margin color-grn font-spr">@T("Checkout.ThankYou")</h4>
+            <div class="underline-dased clearfix margin-t5">&nbsp;</div>
+        </div>
+        <div class="page-body checkout-data">
+            @Html.Widget("checkout_completed_top")
+            <div class="section order-completed">
+                <div class="title">
+                    <strong>@T("Checkout.YourOrderHasBeenSuccessfullyProcessed")</strong>
+                </div>
+                <ul class="details no-padd no-list margin-t10">
+                    <li>
+                        @T("Checkout.OrderNumber"): @Model.OrderId
+                    </li>
+                    <li>
+                        <a href="@Url.RouteUrl("OrderDetails", new { orderID = Model.OrderId })">@T("Checkout.PlacedOrderDetails")</a>
+                    </li>
+                </ul>
+                <div class="buttons">
+                    <button type="button" class="button-2 order-completed-continue-button btn btn-success no-br" onclick="setLocation('@Url.RouteUrl("HomePage")')"><i class="fa fa-angle-double-right"></i> @T("Checkout.ThankYou.Continue")</button>
+                </div>
+            </div>
+            @Html.Widget("checkout_completed_bottom")
+        </div>
+    </div>
+</div>

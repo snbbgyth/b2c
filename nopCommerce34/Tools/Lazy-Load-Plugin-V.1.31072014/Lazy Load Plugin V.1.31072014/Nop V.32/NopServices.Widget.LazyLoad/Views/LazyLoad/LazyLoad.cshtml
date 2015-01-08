@@ -1,0 +1,16 @@
+﻿@using Nop.Web.Framework;
+
+@model NopServices.Widget.LazyLoad.Models.ConfigurationModel
+
+<script type="text/javascript" src="~/Plugins/NopServices.Widget.LazyLoad/Scripts/jquery.lazyload.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        $("@Model.JQuerySelector").lazyload(
+            {
+                placeholder: "/Plugins/NopServices.Widget.LazyLoad/images/grey.gif",
+                effect: "fadeIn",
+                effectspeed: @Model.EffectSpeed
+            });
+    });
+
+</script>

@@ -1,0 +1,26 @@
+﻿@model IList<ProductOverviewModel>
+
+@using Nop.Web.Models.Catalog;
+
+@if (Model.Count > 0)
+{
+    <div id="featured" class="w100p pull-left">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-title font20 font-spr color-grn">@T("HomePage.Products")</h3>
+                <div class="underline-dased w100p pull-left clearfix">&nbsp;</div>
+            </div>
+        </div>
+        <div class="row product-4cols">
+            @foreach (var item in Model)
+        {
+                
+                    @Html.Partial("_ProductBox", item)
+                
+                
+          
+        }
+            </div>
+        </div>
+    
+}

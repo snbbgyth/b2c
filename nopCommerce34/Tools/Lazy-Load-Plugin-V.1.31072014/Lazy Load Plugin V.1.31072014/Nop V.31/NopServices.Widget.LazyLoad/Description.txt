@@ -1,0 +1,8 @@
+Group: Widgets
+FriendlyName: Lazy Load
+SystemName: Widget.LazyLoad
+Version: 1.0
+SupportedVersions: 3.10
+Author: NopServices
+DisplayOrder: 1
+FileName: NopServices.Widget.LazyLoad.dll

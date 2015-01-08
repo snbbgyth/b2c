@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+
+@Html.Widget("home_page_top")
+@Html.Action("HomepageCategories", "Catalog")
+
+<div class="page-home home-page">
+    <div class="page-body">
+		<div class="right_column col-md-12 nopadding">
+			@Html.Action("HomePageNews", "News")
+			@Html.Action("HomePagePolls", "Poll")
+			@Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
+			@Html.Widget("home_page_bottom")
+			
+			<ul class="nav nav-tabs cl-effect-5" id="myTab">
+			  <li class="active"><a href="#featured" data-toggle="tab"> <span data-hover="FEATURED">FEATURED</span></a></li>
+			  <li><a href="#newproducts" data-toggle="tab"><span data-hover="NEW ARRIVALS">NEW ARRIVALS</span></a></li>
+			  <li><a href="#bestseller" data-toggle="tab"> <span data-hover="BESTSELLERS">BESTSELLERS</span> </a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="active tab-pane " id="featured">
+					@Html.Action("HomepageProducts", "Product")
+				</div>
+
+				<div class="tab-pane" id="newproducts">
+				</div>
+
+				<div class="tab-pane" id="bestseller">
+					@Html.Action("HomepageBestSellers", "Product")
+				</div>
+			</div>
+		</div>
+		
+    </div>
+</div>
+
+
+<script>
+	$('#myTab a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+	})
+</script>
+
+
+<script>
+	$(document).ready(function() {
+ 
+	  var owl = $("#owl-demo");
+	  var owl1 = $("#owl-demo1");
+	 
+	  owl.owlCarousel({
+		  items : 4, //10 items above 1000px browser width
+		  itemsDesktop : [1000,4], //5 items between 1000px and 901px
+		  itemsDesktopSmall : [900,2], // betweem 900px and 601px
+		  itemsTablet: [600,2], //2 items between 600 and 0
+		  itemsMobile: [400,1], //2 items between 600 and 0
+	  });
+	  
+	  owl1.owlCarousel({
+		  items : 5, //10 items above 1000px browser width
+		  itemsDesktop : [1000,5], //5 items between 1000px and 901px
+		  itemsDesktopSmall : [900,3], // betweem 900px and 601px
+		  itemsTablet: [600,2], //2 items between 600 and 0
+		  itemsMobile: [400,1], //2 items between 600 and 0
+	  });
+	 
+	  // Custom Navigation Events
+	  $(".next").click(function(){
+		owl.trigger('owl.next');
+	  })
+	  $(".prev").click(function(){
+		owl.trigger('owl.prev');
+	  })
+
+	  
+	  // Custom Navigation Events
+	  $(".next1").click(function(){
+		owl1.trigger('owl.next');
+	  })
+	  $(".prev1").click(function(){
+		owl1.trigger('owl.prev');
+	  })
+	  
+	});
+</script>

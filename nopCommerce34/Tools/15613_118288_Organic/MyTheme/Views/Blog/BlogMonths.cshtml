@@ -1,0 +1,31 @@
+﻿@model IList<BlogPostYearModel>
+@using Nop.Web.Models.Blogs;
+@if (Model.Count > 0)
+{
+    <div class="block block-blog-archive panel panel-default left-box">
+        <div class="panel-heading">
+            <h3 class="panel-title font14 capital"><i class="fa fa-file-o"></i> @T("Blog.Archive")</h3>
+        </div>
+        <div class="listbox panel-body">
+            <ul class="list nav nav-stacked" id="blog-month-list">
+                @foreach (var yearItem in Model)
+                {
+                    <li class="year">
+                        <strong>@(yearItem.Year)</strong>
+                        <ul class="sublist" id="blog-year-@(yearItem.Year)">
+                            @foreach (var monthItem in yearItem.Months)
+                            {
+                                <li class="month">
+                                    <a href="@Url.RouteUrl("BlogByMonth", new { month = yearItem.Year + "-" + monthItem.Month })">
+                                        @(new DateTime(yearItem.Year, monthItem.Month, 1).ToString("MMMM"))
+                                        (@(monthItem.BlogPostCount))
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}

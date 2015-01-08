@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+<div class="center-1">
+    <div class="page home-page">
+        <div class="page-body">
+            @Html.Widget("home_page_top")
+            <div class="side-2">
+                @Html.Action("NewsletterBox", "Newsletter")
+                @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageBlock" })
+            </div>
+            <div class="center-2">
+                @Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
+                @Html.Action("HomepageCategories", "Catalog")
+                @Html.Action("HomepageProducts", "Product")
+                @Html.Action("HomepageBestSellers", "Product")
+                @Html.Action("HomePageNews", "News")
+                @Html.Action("HomePagePolls", "Poll")
+                @Html.Widget("home_page_bottom")
+            </div>
+        </div>
+    </div>
+</div>
+

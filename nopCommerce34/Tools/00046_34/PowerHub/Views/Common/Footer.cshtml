@@ -1,0 +1,132 @@
+﻿@model FooterModel
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.Common;
+
+<div class="footer">
+    <div class="footer-menu-wrapper">
+		<div class="container nopadding">
+			<div class="column information col-md-4 col-sm-4 col-xs-12">
+				<div class="footer_heading">
+					<h3>@T("Footer.Information")</h3>
+				</div>
+				<ul>
+					@if (Model.SitemapEnabled)
+					{
+						<li><a href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
+					}
+					<li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("shippinginfo") })">@T("ShippingReturns")</a></li>
+					<li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("privacyinfo") })">@T("PrivacyNotice")</a></li>
+					<li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("conditionsofuse") })">@T("ConditionsOfUse")</a></li>
+					@if (Model.NewsEnabled)
+					{
+						<li><a href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+					}
+					@if (Model.BlogEnabled)
+					{
+						<li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+					}
+					@if (Model.ForumEnabled)
+					{
+						<li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+					}
+					@*<li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("aboutus") })">@T("AboutUs")</a></li>
+					<li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>*@
+				</ul>
+			</div>
+			<div class="column customer-service col-md-4 col-sm-4 col-xs-12">
+				<div class="footer_heading"> <h3>@T("ContactUs")</h3></div>
+				<ul>
+					<li> <i class="fa fa-lg fa-map-marker"> </i> &nbsp; @T("contact.address") </li> 
+					<li> <i class="fa fa-lg fa-mobile"> </i> &nbsp; @T("contact.number") </li> 
+					<li> <i class="fa fa-envelope"> </i> &nbsp; @T("contact.email") </li> 
+				</ul>
+				@*<ul>
+					<li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+					@if (Model.RecentlyViewedProductsEnabled)
+					{
+						<li><a href="@Url.RouteUrl("RecentlyViewedProducts")">@T("Products.RecentlyViewedProducts")</a></li>
+					}
+					@if (Model.CompareProductsEnabled)
+					{
+						<li><a href="@Url.RouteUrl("CompareProducts")">@T("Products.Compare.List")</a></li>
+					}
+					@if (Model.RecentlyAddedProductsEnabled)
+					{
+						<li><a href="@Url.RouteUrl("RecentlyAddedProducts")">@T("Products.NewProducts")</a></li>
+					}
+				</ul>
+				<ul>
+					<li><a href="@Url.RouteUrl("CustomerInfo")" class="account">@T("Account.MyAccount")</a></li>
+					@if (!Model.HideOrders)
+					{
+						<li><a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a></li>
+					}
+					@if (!Model.HideAddresses)
+					{
+						<li><a href="@Url.RouteUrl("CustomerAddresses")" class="">@T("Account.CustomerAddresses")</a></li>
+					}
+					@if (Model.ShoppingCartEnabled)
+					{
+						<li><a href="@Url.RouteUrl("ShoppingCart")" class="ico-cart">@T("ShoppingCart")</a></li>
+					}
+					@if (Model.WishlistEnabled)
+					{
+						<li><a href="@Url.RouteUrl("Wishlist")" class="ico-wishlist">@T("Wishlist")</a></li>
+					}
+				</ul>*@
+			</div>
+			
+			@Html.Action("NewsletterBox", "Newsletter")
+		</div>
+    </div>
+	<div class="container" style="padding:7px 0;">
+		<div class="col-md-6">
+			@if (Model.DisplayTaxShippingInfoFooter)
+			{
+				var inclTax = EngineContext.Current.Resolve<IWorkContext>().TaxDisplayType == TaxDisplayType.IncludingTax;
+				<div class="footer-tax-shipping">
+					@T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("shippinginfo")}))
+				</div>
+			}
+			<div class="footer-disclaimer">
+				@T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)
+			</div>
+			<div class="footer-poweredby">
+				Powered by <a href="http://www.nopcommerce.com/">nopCommerce</a>
+				@*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
+					Find more info here http://www.nopcommerce.com/copyrightremoval.aspx*@
+			</div>
+			<div class="footer-store-theme">
+				@Html.Action("StoreThemeSelector", "Common")
+			</div>
+		</div>
+		
+		<div class="col-md-6 pull-right">
+			<ul class="social">
+				@if (!string.IsNullOrEmpty(Model.FacebookLink))
+				{
+					<li class="facebook"><a href="@Model.FacebookLink" target="_blank"> &nbsp; </a></li>
+				}
+								@if (!string.IsNullOrEmpty(Model.TwitterLink))
+				{
+					<li class="twitter"><a href="@Model.TwitterLink" target="_blank"> &nbsp; </a></li>
+				}
+								@if (Model.NewsEnabled)
+				{
+					<li class="rss"><a href="@Url.RouteUrl("NewsRSS", new {languageId = Model.WorkingLanguageId})"> &nbsp; </a></li>
+				}
+								@if (!string.IsNullOrEmpty(Model.YoutubeLink))
+				{
+					<li class="youtube"><a href="@Model.YoutubeLink" target="_blank"> &nbsp; </a></li>
+				}
+								@if (!string.IsNullOrEmpty(Model.GooglePlusLink))
+				{
+					<li class="google-plus"><a href="@Model.GooglePlusLink" target="_blank"> &nbsp; </a></li>
+				}
+			</ul>
+		</div>
+	</div>
+    @Html.Widget("footer")
+</div>

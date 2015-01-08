@@ -1,0 +1,8 @@
+﻿@model ProductDetailsModel
+@using Nop.Web.Models.Catalog;
+@if (Model.EmailAFriendEnabled)
+{
+
+    <button type="button" class="button-2 margin-t10 email-a-friend-button btn btn-default font13 no-br pull-left" onclick="setLocation('@Url.RouteUrl("ProductEmailAFriend", new { productId = Model.Id })')"><i class="fa fa-envelope"></i> @T("Products.EmailAFriend")</button>
+
+}
