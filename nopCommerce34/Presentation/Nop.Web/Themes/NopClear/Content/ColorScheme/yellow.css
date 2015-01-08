@@ -1,0 +1,71 @@
+﻿a:hover {
+    color: #d9ba0b;
+}
+
+.search-box-button {
+    background: url(../images/ico-search.png) no-repeat #d9ba0b !important;
+}
+
+    .search-box-button:hover {
+        background: url(../images/ico-search.png) no-repeat #333 !important;
+    }
+
+.header-menu .top-menu, .header-menu .top-menu li .sublist {
+    background-color: #fede63;
+}
+
+.block-newsletter {
+    background-color: #eeeeee;
+}
+
+.header-menu .top-menu a:hover, .header-menu .top-menu a.hover, .order-progress ul li .active-step {
+    color: #000000 !important;
+    background: #d9ba0b !important;
+}
+
+.topic-html-content-body a, .topic-page .page-body a, .news-items .read-more, #productcollateraltab .ui-widget-content a,
+.order-summary-content .cart .cart-item-row td.end, .wishlist-content .cart .cart-item-row td.end, .header-links a:hover,
+.block-account-navigation a.inactive:hover, .wishlist-page .share-info a.share-link, .order-summary-content .cart .cart-item-row .edit-item a,
+.order-details-page .order-notes .download a, .shipment-details-page .tracking-url, .price-range-filter .remove-filter a,
+.product-spec-filter .remove-filter a, .external-auth-association .remove, .news-item-page .news-body a,
+.blog-page .blog-posts .post a.post-title, .blogpost-page .post-body a:hover, .blogpost-page .tags a:hover,
+.customer-info-page .add-more-external-records a, .username-available-status, .return-request-list-page .request-item a,
+.tier-prices .prices-list .item-price, .product-review-helpfulness .vote, .private-message-view-page .view-message a,
+.forum-topic-page .post-content .post-body a, .profile-page .user-last-posts .topic-body a, .csharpcode .rem, #toTop:active, #toTop:focus {
+    color: #d9ba0b;
+}
+
+.button-1, .add-to-cart-button {
+    color: #333;
+    background: #fede63;
+    border: solid 1px #e4c44a;
+    border-bottom: 2px solid #e4c44a;
+}
+
+    .button-1:hover, .button-2:hover {
+        background: #333;
+        border-color: #000;
+        border-bottom: 2px solid #000;
+        color: #fff;
+    }
+
+.product-box-add-to-cart-button {
+    background: #fede63;
+    color: #333;
+}
+
+    .product-box-add-to-cart-button:hover {
+        color: #fff;
+    }
+
+.opc .allow .step-title, .opc .allow .step-title .number, .opc .allow .step-title h2, .checkout-data .order-completed a, .result, .block a:hover {
+    color: #d9ba0b;
+}
+
+#mob-menu-button {
+    background-color: #fede63 !important;
+}
+
+#toTopHover {
+    background: rgba(254, 222, 99, 0.5) url('../images/totop.png') no-repeat scroll 50% 50%;
+}

@@ -1,0 +1,9 @@
+﻿@model ProductDetailsModel
+@using Nop.Web.Models.Catalog;
+
+@if (!String.IsNullOrWhiteSpace(Model.PageShareCode))
+{
+    <div class="btn btn-primary product-share-button">
+        @Html.Raw(Model.PageShareCode)
+    </div>
+}

@@ -1,0 +1,140 @@
+﻿@model CompareProductsModel
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.CompareProducts").Text);
+}
+@using Nop.Web.Models.Catalog;
+@{
+    string columnWidth = "";
+    if (Model.Products.Count > 0)
+    {
+        columnWidth = Math.Round((decimal)(90M / Model.Products.Count), 0).ToString() + "%";
+    }
+
+
+    var specificationAttributes = new List<ProductSpecificationModel>();
+    foreach (var product in Model.Products)
+    {
+        foreach (var attribute in product.SpecificationAttributeModels)
+        {
+            if (specificationAttributes.FirstOrDefault(sa => sa.SpecificationAttributeId == attribute.SpecificationAttributeId) == null)
+            {
+                specificationAttributes.Add(attribute);
+            }
+        }
+    }
+} 
+<div class="page compare-products-page">
+    <h4 class="no-margin font-spr color-grn">@T("Products.Compare.Title")</h4>
+    <div class="underline-dased margin-t5 clearfix">&nbsp;</div>
+    <div class="page-body">
+        @if (Model.Products.Count > 0)
+        {
+            <a href="#" onclick="setLocation('@Url.RouteUrl("ClearCompareList")')" class="clear-list color-37"><i class="fa fa-trash-o"></i> @T("Products.Compare.Clear")</a>
+    <div class="table-responsive clearfix">
+        <table class="compare-products-table table table-bordered bg-f">
+            <tbody>
+                <tr class="overview">
+                    <td>
+                        &nbsp;
+                    </td>
+                    @foreach (var product in Model.Products)
+                    {
+                        <td style="width: @columnWidth;" class="a-center">
+                            <div>
+                                <p class="a-center">
+                                    <button type="button" title="@T("Common.Remove")" class="button-2 remove-button btn btn-danger btn-xs" onclick="setLocation('@Url.RouteUrl("RemoveProductFromCompareList", new { productId = product.Id })')"><i class="fa fa-times"></i> @T("Common.Remove")</button>
+                                </p>
+                                <p class="a-center">
+                                    <img alt="@product.DefaultPictureModel.AlternateText" src="@product.DefaultPictureModel.ImageUrl" title="@product.DefaultPictureModel.Title" />
+                                </p>
+                            </div>
+                        </td>
+                    }
+                </tr>
+                <tr class="product-name">
+                    <td>
+                        &nbsp;
+                    </td>
+                    @foreach (var product in Model.Products)
+                    {
+                        <td style="width: @columnWidth;" class="a-center">
+                            <a href="@Url.RouteUrl("Product", new { SeName = product.SeName })" class="color-grn">@product.Name</a>
+                        </td>
+                    }
+                </tr>
+                <tr class="product-price">
+                    <td>
+                        @T("Products.Compare.Price")
+                    </td>
+                    @foreach (var product in Model.Products)
+                    {
+                        <td style="width: @columnWidth;" class="a-center bold">
+                            @product.ProductPrice.Price
+                        </td>
+                    }
+                </tr>
+                @if (Model.IncludeShortDescriptionInCompareProducts)
+                {
+                    <tr class="short-description">
+                        <td>
+                            @T("Products.Compare.ShortDescription")
+                        </td>
+                        @foreach (var product in Model.Products)
+                        {
+                            <td style="width: @columnWidth;" class="a-left">
+                                @Html.Raw(product.ShortDescription)
+                            </td>
+                        }
+                    </tr>
+                }
+                @foreach (var specificationAttribute in specificationAttributes)
+                {
+                    <tr class="specification">
+                        <td>
+                            @specificationAttribute.SpecificationAttributeName
+                        </td>
+                        @foreach (var product in Model.Products)
+                        {
+                            var foundProductSpec = product.SpecificationAttributeModels.FirstOrDefault(psa => psa.SpecificationAttributeId == specificationAttribute.SpecificationAttributeId);
+                            var specValue = foundProductSpec != null ? foundProductSpec.SpecificationAttributeOption : "";
+
+                            <td style="width: @columnWidth;" class="a-center">
+                                @if (!String.IsNullOrEmpty(specValue))
+                                {
+                                    @specValue
+                                }
+                                else
+                                {
+                                    <text>&nbsp;</text>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+                @if (Model.IncludeFullDescriptionInCompareProducts)
+                {
+                    <tr class="full-description">
+                        <td>
+                            @T("Products.Compare.FullDescription")
+                        </td>
+                        @foreach (var product in Model.Products)
+                        {
+                            <td style="width: @columnWidth;" class="a-left">
+                                @Html.Raw(product.FullDescription)
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+        }
+        else
+        {
+          <div class="alert alert-warning">  @T("Products.Compare.NoItems")</div>
+        }
+    </div>
+</div>

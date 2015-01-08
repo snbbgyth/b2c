@@ -1,0 +1,8 @@
+﻿Group: Payment methods
+FriendlyName: Chinabank
+SystemName: Payments.Chinabank
+Version: 1.02
+SupportedVersions: 3.40
+Author: nopCommerce team
+DisplayOrder: 1
+FileName: Nop.Plugin.Payments.Chinabank.dll

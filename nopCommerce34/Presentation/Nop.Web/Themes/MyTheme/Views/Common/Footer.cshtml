@@ -1,0 +1,136 @@
+﻿@model FooterModel
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.Common;
+
+<div class="container">
+    <div class="row footlinks">
+        <div class="col-md-3">
+            <h3 class="text-title font16 font-spr color-f no-margin capital">@T("Footer.Information")</h3>
+            <div class="underline-dased w100p pull-left margin-t5 clearfix">&nbsp;</div>
+            <ul class="no-list font-sr no-padd">
+                @if (Model.SitemapEnabled)
+                {
+                    <li><a href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
+                }
+                <li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("shippinginfo") })">@T("ShippingReturns")</a></li>
+                <li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("privacyinfo") })">@T("PrivacyNotice")</a></li>
+                <li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("conditionsofuse") })">@T("ConditionsOfUse")</a></li>
+                <li><a href="@Url.RouteUrl("Topic", new {SeName = Html.GetTopicSeName("aboutus") })">@T("AboutUs")</a></li>
+                <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+                
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h3 class="text-title font16 font-spr color-f no-margin capital">@T("Footer.CustomerService")</h3>
+            <div class="underline-dased w100p pull-left margin-t5 clearfix">&nbsp;</div>
+            <ul class="no-list font-sr no-padd">
+                <li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+                @if (Model.NewsEnabled)
+                {
+                    <li><a href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+                }
+                @if (Model.BlogEnabled)
+                {
+                    <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+                }
+                @if (Model.ForumEnabled)
+                {
+                    <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+                }
+                @if (Model.RecentlyViewedProductsEnabled)
+                {
+                    <li><a href="@Url.RouteUrl("RecentlyViewedProducts")">@T("Products.RecentlyViewedProducts")</a></li>
+                }
+                @if (Model.CompareProductsEnabled)
+                {
+                    <li><a href="@Url.RouteUrl("CompareProducts")">@T("Products.Compare.List")</a></li>
+                }
+                @if (Model.RecentlyAddedProductsEnabled)
+                {
+                    <li><a href="@Url.RouteUrl("RecentlyAddedProducts")">@T("Products.NewProducts")</a></li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h3 class="text-title font16 font-spr color-f no-margin capital">@T("Footer.MyAccount")</h3>
+            <div class="underline-dased w100p pull-left margin-t5 clearfix">&nbsp;</div>
+            <ul class="no-list font-sr no-padd">
+                <li><a href="@Url.RouteUrl("CustomerInfo")" class="account">@T("Account.MyAccount")</a></li>
+                @if (!Model.HideOrders)
+                {
+                    <li><a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a></li>
+                }
+                @if (!Model.HideAddresses)
+                {
+                    <li><a href="@Url.RouteUrl("CustomerAddresses")" class="">@T("Account.CustomerAddresses")</a></li>
+                }
+                @if (Model.ShoppingCartEnabled)
+                {
+                    <li><a href="@Url.RouteUrl("ShoppingCart")" class="ico-cart">@T("ShoppingCart")</a></li>
+                }
+                @if (Model.WishlistEnabled)
+                {
+                    <li><a href="@Url.RouteUrl("Wishlist")" class="ico-wishlist">@T("Wishlist")</a></li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h3 class="text-title font16 font-spr color-f no-margin capital">@T("Footer.FollowUs")</h3>
+            <div class="underline-dased w100p pull-left margin-t5 clearfix">&nbsp;</div>
+            <ul class="no-list font-sr no-padd">
+                @if (!string.IsNullOrEmpty(Model.FacebookLink))
+                {
+                    <li class="facebook"><a href="@Model.FacebookLink" target="_blank">@T("Footer.FollowUs.Facebook")</a></li>
+                }
+                @if (!string.IsNullOrEmpty(Model.TwitterLink))
+                {
+                    <li class="twitter"><a href="@Model.TwitterLink" target="_blank">@T("Footer.FollowUs.Twitter")</a></li>
+                }
+                @if (Model.NewsEnabled)
+                {
+                    <li class="rss"><a href="@Url.RouteUrl("NewsRSS", new {languageId = Model.WorkingLanguageId})">@T("Footer.FollowUs.RSS")</a></li>
+                }
+                @if (!string.IsNullOrEmpty(Model.YoutubeLink))
+                {
+                    <li class="youtube"><a href="@Model.YoutubeLink" target="_blank">@T("Footer.FollowUs.Youtube")</a></li>
+                }
+                @if (!string.IsNullOrEmpty(Model.GooglePlusLink))
+                {
+                    <li class="google-plus"><a href="@Model.GooglePlusLink" target="_blank">@T("Footer.FollowUs.GooglePlus")</a></li>
+                }
+            </ul>
+        </div>
+
+
+        </div>
+    <div class="underline-dased w100p pull-left margin-t15 clearfix">&nbsp;</div>
+    <div class="row">
+        <div class="col-md-5">
+            <p class="copyright font14 color-f font-sr">
+                版权 &copy; 2014 宁康商行拥有所有解释权.<br>
+                <small>技术支持：春天软件</small>
+            </p>
+        </div>
+        <div class="col-md-5 pull-right">
+            <img src="~/Themes/MyTheme/Content/images/paypal.png" alt="paypal" class="pull-right margin-l10">
+            <img src="~/Themes/MyTheme/Content/images/mastercard.png" alt="mastercard" class="pull-right margin-l10">
+            <img src="~/Themes/MyTheme/Content/images/visa.png" alt="visa" class="pull-right">
+        </div>   
+        @if (Model.DisplayTaxShippingInfoFooter)
+        {
+            var inclTax = EngineContext.Current.Resolve<IWorkContext>().TaxDisplayType == TaxDisplayType.IncludingTax;
+            <div class="footer-tax-shipping">
+                @T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("shippinginfo") }))
+            </div>
+        }
+        <div class="footer-disclaimer hide">
+            @T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)
+        </div>
+        <div class="footer-store-theme">
+            @Html.Action("StoreThemeSelector", "Common")
+        </div>
+        </div>
+        @Html.Widget("footer")
+    </div>

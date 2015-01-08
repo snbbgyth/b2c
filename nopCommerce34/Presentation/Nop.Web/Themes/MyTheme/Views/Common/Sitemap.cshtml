@@ -1,0 +1,88 @@
+﻿@model SitemapModel
+@using Nop.Web.Models.Common;
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Sitemap").Text);
+}
+<div class="row">
+    
+    <div class="page sitemap-page">
+        <div class="col-md-3">
+            <h4 class="no-margin color-grn font-sr">@T("Sitemap")</h4>
+            <div class="underline-dased clearfix margin-t5">&nbsp;</div>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a class="no-br _hov-efect" href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+                @if (Model.NewsEnabled)
+                {
+                    <li><a class="no-br _hov-efectr" href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+                }
+                @if (Model.BlogEnabled)
+                {
+                    <li><a class="no-br _hov-efect" href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+                }
+                @if (Model.ForumEnabled)
+                {
+                    <li><a class="no-br _hov-efect" href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+                }
+                <li><a class="no-br _hov-efect account" href="@Url.RouteUrl("CustomerInfo")" >@T("Account.MyAccount")</a></li>
+                @if (Model.Topics.Count > 0)
+                {
+                    foreach (var item in Model.Topics)
+                    {
+                        <li><a class="no-br _hov-efect" href="@Url.RouteUrl("Topic", new {Sename = Html.GetTopicSeName(item.SystemName)})">@item.Title</a></li>
+                    }
+                }
+            </ul>
+
+        </div>
+       
+
+                @if (Model.Categories.Count > 0)
+                {
+                     <div class="col-md-3">
+            <h4 class="no-margin color-grn font-sr">@T("Sitemap.Categories")</h4>
+            <div class="underline-dased clearfix margin-t5">&nbsp;</div>
+            <ul class="nav nav-pills nav-stacked">
+                @foreach (var category in Model.Categories)
+                {
+                    <li><a class="no-br _hov-efect" href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a></li>
+                }
+                </ul>
+            </div>
+     
+                }
+                @if (Model.Manufacturers.Count > 0)
+                {
+                    <div class="col-md-3">
+            <h4 class="no-margin color-grn font-sr">@T("Sitemap.Manufacturers")</h4>
+            <div class="underline-dased clearfix margin-t5">&nbsp;</div>
+            <ul class="nav nav-pills nav-stacked">
+                @foreach (var manufacturer in Model.Manufacturers)
+                {
+                    <li><a class="no-br _hov-efect" href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">@manufacturer.Name</a></li>
+                }
+                </ul>
+            </div>
+   
+                }
+                @if (Model.Products.Count > 0)
+                {
+                    <div class="col-md-3">
+            <h4 class="no-margin color-grn font-sr">@T("Sitemap.Products")</h4>
+            <div class="underline-dased clearfix margin-t5">&nbsp;</div>
+            <ul class="nav nav-pills nav-stacked">
+                @foreach (var product in Model.Products)
+                {
+                    <li><a class="no-br _hov-efect" href="@Url.RouteUrl("Product", new { SeName = product.SeName })">@product.Name</a></li>
+                }
+                </ul>
+            </div>
+    
+                }
+
+        </div>
+
+    </div>
+

@@ -1,0 +1,75 @@
+﻿@using Nop.Services.Customers
+@using Nop.Core.Domain.Customers
+@{
+    Layout = "~/Views/Shared/_Root.Head.cshtml";
+
+    Html.AddScriptParts("~/Themes/NopClear/Content/js/hoverIntent.js");
+    bool isRegister = WorkContext.CurrentCustomer.IsRegistered();
+}
+@Html.Widget("body_start_html_tag_after")
+@Html.Partial("_Notifications")
+@Html.Action("AdminHeaderLinks", "Common")
+
+<div class="header-bar">
+    <div class="header-bar-wrapper">
+        <div class="auth">
+            @if (isRegister)
+            {
+                <span><a href="@Url.RouteUrl("CustomerInfo")" class="account">@WorkContext.CurrentCustomer.Username</a></span>
+                <span><a href="@Url.RouteUrl("Logout")" class="ico-logout">@T("Account.Logout")</a></span>
+            }
+            else
+            {
+                <span><a href="@Url.RouteUrl("Register")" class="ico-register">@T("Account.Register")</a></span>
+                <span><a href="@Url.RouteUrl("Login")" class="ico-login">@T("Account.Login")</a></span>
+            }
+        </div>
+        <div class="tax-display-type-selector">
+            @Html.Action("TaxTypeSelector", "Common")
+        </div>
+        <div class="currency-selector">
+            @Html.Action("CurrencySelector", "Common")
+        </div>
+        <div class="language-selector">
+            @Html.Action("LanguageSelector", "Common")
+        </div>
+        <div class="clear"></div>
+        @Html.Widget("header_selectors")
+    </div>
+</div>
+<div class="master-wrapper-page">
+    @Html.Action("JavaScriptDisabledWarning", "Common")
+    <div class="master-wrapper-content">
+        <script type="text/javascript">
+            AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart');
+            $(document).ready(function () {
+                $('.product-item').hoverIntent({
+                    over: function () {
+                        $(this).find('.product-box-add-to-cart-button').fadeIn();
+                    },
+                    out: function () {
+                        $(".product-box-add-to-cart-button").fadeOut();
+                    },
+                    interval: 50
+                });
+            });
+        </script>
+        @Html.Partial("Header")
+        <div class="header-menu">
+            @Html.Action("TopMenu", "Catalog")
+        </div>
+        @Html.Widget("content_before")
+        @*ajax loading window*@
+        <div class="ajax-loading-block-window" style="display: none">
+            <div class="loading-image">
+            </div>
+        </div>
+        <div class="master-wrapper-main">
+            @RenderBody()
+        </div>
+        @Html.Widget("content_after")
+    </div>
+    @Html.Action("Footer", "Common")
+</div>
+@Html.Action("EuCookieLaw", "Common")
+@Html.Widget("body_end_html_tag_before")

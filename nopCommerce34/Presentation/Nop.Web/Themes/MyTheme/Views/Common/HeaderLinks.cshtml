@@ -1,0 +1,68 @@
+﻿@model HeaderLinksModel
+@using Nop.Web.Models.Common;
+<p class="pull-left no-margin font12 font-sr">
+
+    @Html.Widget("header_links_before")
+    @if (Model.IsAuthenticated)
+    {
+        <a href="@Url.RouteUrl("CustomerInfo")" class="login color-37">@Model.CustomerEmailUsername</a>
+        <a href="@Url.RouteUrl("Logout")" class="signup color-37">@T("Account.Logout")</a>
+    }
+    else
+    {
+        <a href="@Url.RouteUrl("Login")" class="login color-37">@T("Account.Login")</a>
+        <a href="@Url.RouteUrl("Register")" class="signup color-37">@T("Account.Register")</a>
+    }
+    @if (Model.AllowPrivateMessages)
+    {
+        <a href="@Url.RouteUrl("PrivateMessages", new { tab = "" })" class="ico-inbox">@T("PrivateMessages.Inbox")</a>
+        @Model.UnreadPrivateMessages
+        if (!string.IsNullOrEmpty(Model.AlertMessage))
+        {
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    displayPopupNotification('@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.AlertMessage))', 'success', false);
+                });
+            </script>
+        }
+    }
+    @if (Model.WishlistEnabled)
+    {
+        <a href="@Url.RouteUrl("Wishlist")" class="wishlist color-37">@T("Wishlist") @T("Wishlist.HeaderQuantity", Model.WishlistItems)</a>
+    }
+    <div class="pull-right head-shopbag" id="topcartlink">
+        @if (Model.ShoppingCartEnabled)
+        {
+            <a href="@Url.RouteUrl("ShoppingCart")">
+                <div class="shopbag rel pull-left">
+                    <img src="~/Themes/MyTheme/Content/images/shop-bag.png" alt="shop-bag">
+                    <span class="badge abs">@T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems)</span>
+                </div>
+                <h5 class="pull-left color-grn font-sr margin-l20 no-margin">@T("ShoppingCart")<br><small>@T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems) Items</small></h5>
+            </a>
+        }
+</p>
+
+@Html.Widget("header_links_after")
+    </div>
+    @if (Model.ShoppingCartEnabled)
+    {
+        
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('header').on('mouseenter', '#topcartlink', function () {
+                    $('#flyout-cart').addClass('active');
+                });
+                $('header').on('mouseleave', '#topcartlink', function () {
+                    $('#flyout-cart').removeClass('active');
+                });
+                $('header').on('mouseenter', '#flyout-cart', function () {
+                    $('#flyout-cart').addClass('active');
+                });
+                $('header').on('mouseleave', '#flyout-cart', function () {
+                    $('#flyout-cart').removeClass('active');
+                });
+            });
+        </script>
+    }
+

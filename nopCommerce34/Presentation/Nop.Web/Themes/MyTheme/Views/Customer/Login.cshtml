@@ -1,0 +1,161 @@
+﻿@model LoginModel
+@using Nop.Web.Models.Customer;
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Login").Text);
+
+    //register URL with return URL (if specified)
+    var registerUrl = Url.RouteUrl("Register");
+    if (!String.IsNullOrEmpty(this.Context.Request.QueryString["returnUrl"]))
+    {
+        var webHelper = EngineContext.Current.Resolve<IWebHelper>();
+        registerUrl = webHelper.ModifyQueryString(registerUrl, "returnurl=" + HttpUtility.UrlEncode(this.Context.Request.QueryString["returnUrl"]), null);
+    }
+}
+
+<div class="page login-page">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-title font20 font-spr color-grn">@T("Account.Login.Welcome")</h3>
+            <div class="underline-dased w100p pull-left clearfix">&nbsp;</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Partial("_ExternalAuthentication.AssociateMessage")
+            @Html.Partial("_ExternalAuthentication.Errors")
+            @if (Model.CheckoutAsGuest)
+{
+
+
+    <div class="panel panel-default padd15 register  no-br">
+        <div class="panel-body no-br">
+            <h2 class="font-sr">@T("Account.Login.CheckoutAsGuestOrRegister")</h2>
+            <p class="font12">@Html.Action("TopicBlock", "Topic", new { systemName = "CheckoutAsGuestOrRegister" })</p>
+            <p>
+                <input type="button" class="button-1 btn btn-primary checkout-as-guest-button register-button" onclick="location.href='@Url.RouteUrl("Checkout")'" value="@T("Account.Login.CheckoutAsGuest")" />
+                <input type="button" class="button-1 btn btn-primary register-button" onclick="location.href='@registerUrl'" value="@T("Account.Register")" />
+            </p>
+        </div>
+    </div>
+        @*<div class="new-wrapper checkout-as-guest-or-register-block">
+            <div class="title">
+                <strong>@T("Account.Login.CheckoutAsGuestOrRegister")</strong>
+            </div>
+            <div class="text">
+                @Html.Action("TopicBlock", "Topic", new { systemName = "CheckoutAsGuestOrRegister" })
+            </div>
+            <div class="buttons">
+                <input type="button" class="button-1 checkout-as-guest-button" onclick="location.href='@Url.RouteUrl("Checkout")'" value="@T("Account.Login.CheckoutAsGuest")" />
+                <input type="button" class="button-1 register-button" onclick="location.href='@registerUrl'" value="@T("Account.Register")" />
+            </div>
+        </div>*@
+   
+}
+else
+{
+                @*<div class="new-wrapper register-block">
+                    <div class="title">
+                        <strong>@T("Account.Login.NewCustomer")</strong>
+                    </div>
+                    <div class="text">
+                        @T("Account.Login.NewCustomerText")
+                    </div>
+                    <div class="buttons">
+                        <input type="button" class="button-1 register-button" onclick="location.href='@registerUrl'" value="@T("Account.Register")" />
+                    </div>
+                </div>*@
+    <div class="panel panel-default padd15 register  no-br">
+        <div class="panel-body  no-br">
+            <h2 class="font-sr">@T("Account.Login.NewCustomer")</h2>
+            <p class="font12">@T("Account.Login.NewCustomerText")</p>
+            <p><input type="button" class="button-1 btn btn-primary register-button" onclick="location.href='@registerUrl'" value="@T("Account.Register")" /></p>
+        </div>
+    </div>
+}
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary login-box no-br">
+                <div class="panel-heading no-border no-br">
+                    <h4 class="no-margin">@T("Account.Login.ReturningCustomer")</h4>
+                </div>
+                <div class="panel-body  no-br">
+                    <div class="form-fields form-horizontal" role="form">
+                        @using (Html.BeginForm())
+{
+
+    if (Model.UsernamesEnabled)
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Username, new { @class = "col-sm-3 control-label" }, ":")
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Username, new { @class = "username form-control no-br", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-sm-3 control-label" }, ":")
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Email, new { @class = "email form-control no-br", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            </div>
+    }
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-sm-3 control-label" }, ":")
+        <div class="col-sm-9">
+            @Html.PasswordFor(m => m.Password, new { @class = "password form-control no-br" })
+            @Html.ValidationMessageFor(m => m.Password)
+            </div>
+        </div>
+    <div class="form-group reversed">
+        <div class="col-sm-offset-3 col-sm-9">
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe)
+            <span class="forgot-password col-sm-9">
+                @Html.RouteLink(T("Account.Login.ForgotPassword").Text, "PasswordRecovery")
+            </span>
+        </div>
+    </div>
+    if (Model.DisplayCaptcha)
+    {
+        <div class="form-group captcha-box">
+            @Html.Raw(Html.GenerateCaptcha())
+        </div>
+    }
+    <div class="form-group buttons">
+        <div class="col-sm-offset-3 col-sm-9">
+            <input class="btn btn-default btn-login" type="submit" value="@T("Account.Login.LoginButton")" />
+            </div>
+        </div>
+                             <div class="message-error">
+                                @Html.ValidationSummary(true, T("Account.Login.Unsuccessful").Text)
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+           
+        </div>
+
+
+          
+            <div class="external-authentication">
+                @Html.Action("ExternalMethods", "ExternalAuthentication")
+            </div>
+        <div class="col-md-12">
+            @Html.Action("TopicBlock", "Topic", new { systemName = "LoginRegistrationInfo" })
+        </div>
+    </div>
+    </div>
+
