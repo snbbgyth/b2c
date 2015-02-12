@@ -7,3 +7,12 @@ H:\MyComanyDesign\b2c\nopCommerce_3.40_Source\Tests\Nop.Tests\bin\Debug\Rhino.Mo
 H:\MyComanyDesign\b2c\nopCommerce_3.40_Source\Tests\Nop.Tests\obj\Debug\Nop.Tests.csprojResolveAssemblyReference.cache
 H:\MyComanyDesign\b2c\nopCommerce_3.40_Source\Tests\Nop.Tests\obj\Debug\Nop.Tests.dll
 H:\MyComanyDesign\b2c\nopCommerce_3.40_Source\Tests\Nop.Tests\obj\Debug\Nop.Tests.pdb
+H:\Projects\Github\b2c\nopCommerce34\Tests\Nop.Tests\bin\Debug\Nop.Tests.dll
+H:\Projects\Github\b2c\nopCommerce34\Tests\Nop.Tests\bin\Debug\Nop.Tests.pdb
+H:\Projects\Github\b2c\nopCommerce34\Tests\Nop.Tests\bin\Debug\nunit.framework.dll
+H:\Projects\Github\b2c\nopCommerce34\Tests\Nop.Tests\bin\Debug\Rhino.Mocks.dll
+H:\Projects\Github\b2c\nopCommerce34\Tests\Nop.Tests\bin\Debug\nunit.framework.xml
+H:\Projects\Github\b2c\nopCommerce34\Tests\Nop.Tests\bin\Debug\Rhino.Mocks.xml
+H:\Projects\Github\b2c\nopCommerce34\Tests\Nop.Tests\obj\Debug\Nop.Tests.csprojResolveAssemblyReference.cache
+H:\Projects\Github\b2c\nopCommerce34\Tests\Nop.Tests\obj\Debug\Nop.Tests.dll
+H:\Projects\Github\b2c\nopCommerce34\Tests\Nop.Tests\obj\Debug\Nop.Tests.pdb
