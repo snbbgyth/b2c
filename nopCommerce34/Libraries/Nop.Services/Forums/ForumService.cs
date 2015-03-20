@@ -705,7 +705,6 @@ namespace Nop.Services.Forums
             {
                 int previousForumId = forumTopic.ForumId;
                 var newForum = GetForumById(newForumId);
-
                 if (newForum != null)
                 {
                     if (previousForumId != newForumId)
@@ -713,7 +712,6 @@ namespace Nop.Services.Forums
                         forumTopic.ForumId = newForum.Id;
                         forumTopic.UpdatedOnUtc = DateTime.UtcNow;
                         UpdateTopic(forumTopic);
-
                         //update forum stats
                         UpdateForumStats(previousForumId);
                         UpdateForumStats(newForumId);

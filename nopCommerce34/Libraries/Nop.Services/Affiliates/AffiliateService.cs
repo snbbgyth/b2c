@@ -58,7 +58,6 @@ namespace Nop.Services.Affiliates
         {
             if (affiliate == null)
                 throw new ArgumentNullException("affiliate");
-
             affiliate.Deleted = true;
             UpdateAffiliate(affiliate);
         }

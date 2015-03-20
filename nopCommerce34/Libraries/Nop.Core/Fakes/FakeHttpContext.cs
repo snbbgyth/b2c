@@ -57,7 +57,6 @@ namespace Nop.Core.Fakes
             _cookies = cookies;
             _sessionItems = sessionItems;
             _serverVariables = serverVariables;
-
             _items = new Dictionary<object, object>();
         }
 

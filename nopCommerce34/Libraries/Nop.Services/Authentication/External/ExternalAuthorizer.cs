@@ -103,7 +103,6 @@ namespace Nop.Services.Authentication.External
                     // The person is trying to log in as himself.. bit weird
                     return new AuthorizationResult(OpenAuthenticationStatus.Authenticated);
                 }
-
                 var result = new AuthorizationResult(OpenAuthenticationStatus.Error);
                 result.AddError("Account is already assigned");
                 return result;

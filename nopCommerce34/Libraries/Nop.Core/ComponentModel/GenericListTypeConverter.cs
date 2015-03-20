@@ -31,13 +31,11 @@ namespace Nop.Core.ComponentModel
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-
             if (sourceType == typeof(string))
             {
                 string[] items = GetStringArray(sourceType.ToString());
                 return items.Any();
             }
-
             return base.CanConvertFrom(context, sourceType);
         }
 
